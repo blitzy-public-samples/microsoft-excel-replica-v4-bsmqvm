@@ -1,0 +1,31 @@
+<Application x:Class="ExcelDesktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ExcelDesktop"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Global Styles -->
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+                
+                <!-- Themes -->
+                <ResourceDictionary Source="Themes/LightTheme.xaml"/>
+                <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Global application-level resources -->
+            <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="PrimaryForegroundBrush" Color="#333333"/>
+            <SolidColorBrush x:Key="AccentBrush" Color="#0078D4"/>
+
+            <!-- Accessibility settings -->
+            <sys:Double x:Key="DefaultFontSize">14</sys:Double>
+            <sys:Double x:Key="LargeFontSize">18</sys:Double>
+            <FontFamily x:Key="DefaultFontFamily">Segoe UI</FontFamily>
+
+            <!-- Localization resource -->
+            <local:LocalizationProvider x:Key="LocalizationProvider"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
