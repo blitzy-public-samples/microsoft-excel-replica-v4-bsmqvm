@@ -1,0 +1,43 @@
+{
+  "name": "microsoft-excel-testing",
+  "version": "1.0.0",
+  "description": "Testing module for Microsoft Excel project",
+  "main": "setup.ts",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest unit",
+    "test:integration": "jest integration",
+    "test:e2e": "jest e2e",
+    "test:performance": "jest performance",
+    "test:security": "jest security",
+    "test:accessibility": "jest accessibility",
+    "test:localization": "jest localization",
+    "test:api": "jest api",
+    "test:add-ins": "jest add-ins",
+    "test:collaboration": "jest collaboration",
+    "test:data-access": "jest data-access",
+    "test:ci-cd": "jest ci-cd",
+    "coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/excel.git"
+  },
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/microsoft/excel/issues"
+  },
+  "homepage": "https://github.com/microsoft/excel#readme",
+  "dependencies": {
+    "@types/jest": "^27.0.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.0.0",
+    "typescript": "^4.5.0",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/jest-dom": "^5.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0"
+  }
+}
