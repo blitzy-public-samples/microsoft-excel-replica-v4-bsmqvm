@@ -1,0 +1,77 @@
+---
+# Main tasks for the webserver role in the Ansible playbook for the Microsoft Excel project infrastructure
+
+# Update package cache (for Debian-based systems)
+- name: Update package cache
+  ansible.builtin.apt:
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+# Install web server package
+- name: Install web server package
+  ansible.builtin.package:
+    name: "{{ webserver_package }}"
+    state: present
+
+# Copy web server configuration
+- name: Copy web server configuration
+  ansible.builtin.template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: '0644'
+  notify: Reload web server
+
+# Create application directory
+- name: Create application directory
+  ansible.builtin.file:
+    path: "{{ app_root_dir }}"
+    state: directory
+    mode: '0755'
+
+# Deploy application files
+- name: Deploy application files
+  ansible.builtin.copy:
+    src: files/excel_app/
+    dest: "{{ app_root_dir }}"
+    mode: '0644'
+
+# Configure SSL
+- name: Configure SSL
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0600'
+  loop:
+    - { src: 'files/ssl/certificate.crt', dest: '{{ ssl_certificate_path }}/certificate.crt' }
+    - { src: 'files/ssl/private.key', dest: '{{ ssl_certificate_path }}/private.key' }
+
+# Start and enable web server service
+- name: Start and enable web server service
+  ansible.builtin.systemd:
+    name: "{{ webserver_service_name }}"
+    state: started
+    enabled: true
+
+# Configure firewall
+- name: Configure firewall
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - http
+    - https
+
+# Set up log rotation
+- name: Set up log rotation
+  ansible.builtin.template:
+    src: templates/logrotate.conf.j2
+    dest: /etc/logrotate.d/excel_app
+    mode: '0644'
+
+# Handler to reload web server
+- name: Reload web server
+  ansible.builtin.systemd:
+    name: "{{ webserver_service_name }}"
+    state: reloaded
+  listen: Reload web server
