@@ -1,0 +1,55 @@
+---
+- name: Install database server
+  ansible.builtin.package:
+    name: "{{ database_package }}"
+    state: present
+  become: true
+
+- name: Configure database server
+  ansible.builtin.template:
+    src: database_config.j2
+    dest: "{{ database_config_path }}"
+  notify: Restart database service
+  become: true
+
+- name: Create database
+  community.general.mysql_db:
+    name: "{{ database_name }}"
+    state: present
+  become: true
+
+- name: Create database user
+  community.general.mysql_user:
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+    priv: "{{ database_name }}.*:ALL"
+    state: present
+  become: true
+
+- name: Set up database backup
+  ansible.builtin.cron:
+    name: Database backup
+    minute: "0"
+    hour: "2"
+    job: "{{ backup_script_path }}"
+  become: true
+
+- name: Apply security patches
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    update_cache: true
+  become: true
+
+- name: Configure firewall for database
+  ansible.builtin.ufw:
+    rule: allow
+    port: "{{ database_port }}"
+  become: true
+
+# Handlers
+- name: Restart database service
+  ansible.builtin.systemd:
+    name: "{{ database_service_name }}"
+    state: restarted
+  become: true
