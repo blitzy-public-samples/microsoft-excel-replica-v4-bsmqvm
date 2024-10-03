@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: Microsoft Excel Backend API
+  description: API for Microsoft Excel backend services, providing functionality for workbooks, worksheets, cells, charts, and more.
+  version: 1.0.0
+  contact:
+    name: Microsoft Excel API Support
+    url: https://support.microsoft.com/excel
+    email: excelapi@microsoft.com
+
+servers:
+  - url: https://api.excel.microsoft.com/v1
+    description: Production server
+  - url: https://api-staging.excel.microsoft.com/v1
+    description: Staging server
+
+security:
+  - OAuth2: [read, write]
+
+paths:
+  /workbooks:
+    get:
+      summary: List workbooks
+      description: Retrieves a list of workbooks, potentially with pagination and filtering.
+      tags:
+        - Workbooks
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of items per page
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workbook'
+    post:
+      summary: Create a new workbook
+      description: Creates a new workbook with the provided data.
+      tags:
+        - Workbooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkbookCreate'
+      responses:
+        '201':
+          description: Workbook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workbook'
+
+  /workbooks/{id}:
+    get:
+      summary: Get a workbook
+      description: Retrieves a specific workbook by its ID.
+      tags:
+        - Workbooks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the workbook to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workbook'
+    put:
+      summary: Update a workbook
+      description: Updates an existing workbook with the provided data.
+      tags:
+        - Workbooks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the workbook to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkbookUpdate'
+      responses:
+        '200':
+          description: Workbook updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workbook'
+    delete:
+      summary: Delete a workbook
+      description: Deletes a specific workbook by its ID.
+      tags:
+        - Workbooks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the workbook to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Workbook deleted successfully
+
+  /workbooks/{id}/share:
+    post:
+      summary: Share a workbook
+      description: Shares a workbook with other users.
+      tags:
+        - Workbooks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the workbook to share
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkbookShare'
+      responses:
+        '200':
+          description: Workbook shared successfully
+
+components:
+  schemas:
+    Workbook:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        owner:
+          type: string
+
+    WorkbookCreate:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+
+    WorkbookUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+
+    WorkbookShare:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            type: string
+        permission:
+          type: string
+          enum: [read, write]
+      required:
+        - users
+        - permission
+
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            read: Read access to Excel data
+            write: Write access to Excel data
