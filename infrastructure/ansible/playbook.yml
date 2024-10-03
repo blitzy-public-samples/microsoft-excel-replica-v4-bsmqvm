@@ -1,0 +1,54 @@
+---
+- name: Deploy Microsoft Excel Infrastructure
+  hosts: all
+  become: true
+  vars_files:
+    - vars/main.yml
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+  roles:
+    - webserver
+    - database
+    - security
+
+  tasks:
+    - name: Ensure Excel application directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - /opt/excel/app
+        - /opt/excel/data
+        - /opt/excel/logs
+
+    - name: Copy Excel application files
+      copy:
+        src: "{{ excel_app_source }}"
+        dest: /opt/excel/app
+        mode: '0644'
+
+    - name: Configure Excel application
+      template:
+        src: templates/excel_config.j2
+        dest: /opt/excel/app/config.yml
+        mode: '0644'
+
+    - name: Start Excel application services
+      systemd:
+        name: excel-app
+        state: started
+        enabled: true
+
+  post_tasks:
+    - name: Verify Excel application status
+      uri:
+        url: "http://localhost:{{ excel_app_port }}/health"
+        return_content: true
+      register: health_check
+      failed_when: "'OK' not in health_check.content"
