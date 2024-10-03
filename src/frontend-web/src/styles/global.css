@@ -1,0 +1,146 @@
+/* Import theme variables */
+@import '../styles/theme';
+
+/* Global Resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+:focus {
+  outline: 2px solid var(--focus-color);
+}
+
+/* Theme Variables */
+:root {
+  --primary-color: #0078D4;
+  --background-color: #FFFFFF;
+  --text-color: #252525;
+  --accent-color-green: #107C10;
+  --accent-color-red: #D13438;
+  --accent-color-yellow: #FFC83D;
+  --accent-color-purple: #881798;
+  --focus-color: #0078D4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust styles for tablet devices */
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjust styles for mobile devices */
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Dark Theme */
+body.dark-theme {
+  --background-color: #252525;
+  --text-color: #FFFFFF;
+}
+
+/* Additional Global Styles */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button, input[type="submit"], input[type="button"] {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+  opacity: 0.9;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #005a9e;
+}
