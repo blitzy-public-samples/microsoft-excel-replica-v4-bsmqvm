@@ -1,0 +1,59 @@
+<UserControl x:Class="ExcelDesktop.Controls.CellControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="100">
+    <Grid>
+        <Border x:Name="CellBorder"
+                BorderBrush="{DynamicResource CellBorderBrush}"
+                BorderThickness="1">
+            <Grid>
+                <TextBlock x:Name="CellValueDisplay"
+                           Text="{Binding CellValue, Mode=OneWay}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="2,0,2,0"
+                           TextTrimming="CharacterEllipsis"/>
+                <Rectangle x:Name="SelectionHighlight"
+                           Fill="{DynamicResource SelectionHighlightBrush}"
+                           Opacity="0"
+                           IsHitTestVisible="False"/>
+            </Grid>
+        </Border>
+    </Grid>
+    <UserControl.Resources>
+        <Style x:Key="CellStyle" TargetType="UserControl">
+            <Setter Property="Background" Value="{DynamicResource CellBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource CellForegroundBrush}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Style>
+        <StaticResource ResourceKey="CellStyle"/>
+    </UserControl.Style>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation Storyboard.TargetName="CellBorder"
+                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                    To="{DynamicResource CellHoverBorderColor}"
+                                    Duration="0:0:0.1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation Storyboard.TargetName="CellBorder"
+                                    Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                    To="{DynamicResource CellBorderColor}"
+                                    Duration="0:0:0.1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+</UserControl>
