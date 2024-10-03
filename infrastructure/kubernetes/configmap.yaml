@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: excel-config
+  namespace: excel-namespace
+  labels:
+    app: excel
+data:
+  EXCEL_ENV: "production"
+  API_URL: "http://excel-api-service:3000"
+  MAX_CONCURRENT_CALCULATIONS: "100"
+  ENABLE_REAL_TIME_COLLABORATION: "true"
+  DEFAULT_LANGUAGE: "en-US"
+  LOGGING_LEVEL: "info"
+
+---
+# Human Tasks:
+# 1. Review and adjust the ConfigMap values based on specific deployment requirements.
+# 2. Ensure that the namespace 'excel-namespace' exists or create it before applying this ConfigMap.
+# 3. Verify that the API_URL matches the actual service name and port for the Excel API service.
+# 4. Consider adding any additional configuration parameters that may be needed for the Excel application.
+# 5. Implement a strategy for updating the ConfigMap and restarting dependent pods when configuration changes.
