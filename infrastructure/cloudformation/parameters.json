@@ -1,0 +1,78 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "Development"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t3.medium"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "excel-cloud-key-pair"
+  },
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "vpc-0123456789abcdef0"
+  },
+  {
+    "ParameterKey": "SubnetIds",
+    "ParameterValue": "subnet-0123456789abcdef0,subnet-0123456789abcdef1,subnet-0123456789abcdef2"
+  },
+  {
+    "ParameterKey": "DatabaseName",
+    "ParameterValue": "excelclouddb"
+  },
+  {
+    "ParameterKey": "DatabaseUsername",
+    "ParameterValue": "admin"
+  },
+  {
+    "ParameterKey": "DatabasePassword",
+    "ParameterValue": "{{resolve:secretsmanager:ExcelCloudDBSecret:SecretString:password}}"
+  },
+  {
+    "ParameterKey": "ApiGatewayName",
+    "ParameterValue": "ExcelCloudAPI"
+  },
+  {
+    "ParameterKey": "LambdaFunctionName",
+    "ParameterValue": "ExcelCloudFunction"
+  },
+  {
+    "ParameterKey": "S3BucketName",
+    "ParameterValue": "excel-cloud-storage"
+  },
+  {
+    "ParameterKey": "CloudFrontDomainName",
+    "ParameterValue": "excel-cloud.example.com"
+  },
+  {
+    "ParameterKey": "CertificateArn",
+    "ParameterValue": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+  }
+]
+```
+
+This `parameters.json` file contains the parameter values for the CloudFormation template used in deploying the infrastructure for Microsoft Excel's cloud-based components. Here's a breakdown of the parameters:
+
+1. `EnvironmentName`: Set to "Development" for the development environment.
+2. `InstanceType`: Using "t3.medium" as a balanced instance type for compute resources.
+3. `KeyName`: The name of the EC2 key pair for SSH access.
+4. `VpcId`: The ID of the VPC to deploy resources into (replace with your actual VPC ID).
+5. `SubnetIds`: A comma-separated list of subnet IDs for resource placement (replace with your actual subnet IDs).
+6. `DatabaseName`: The name of the database to be created.
+7. `DatabaseUsername`: The username for database access.
+8. `DatabasePassword`: Using AWS Secrets Manager to securely store and retrieve the database password.
+9. `ApiGatewayName`: The name for the API Gateway.
+10. `LambdaFunctionName`: The name for the Lambda function(s).
+11. `S3BucketName`: The name for the S3 bucket used for file storage.
+12. `CloudFrontDomainName`: The domain name for CloudFront distribution.
+13. `CertificateArn`: The ARN of the SSL certificate for HTTPS (replace with your actual certificate ARN).
+
+This file allows for flexible deployment configurations without changing the CloudFormation template itself. It separates the configuration values from the template, making it easier to manage environment-specific settings and version control.
+
+To use this file, you would typically run a CloudFormation create-stack or update-stack command, referencing both the template and this parameters file. For example:
+
+```
+aws cloudformation create-stack --stack-name excel-infrastructure --template-body file://infrastructure/cloudformation/template.yaml --parameters file://infrastructure/cloudformation/parameters.json
