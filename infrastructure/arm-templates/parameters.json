@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appServicePlanName": {
+            "value": "excelAppServicePlan"
+        },
+        "appServiceName": {
+            "value": "excelWebApp"
+        },
+        "sqlServerName": {
+            "value": "excelsqlserver"
+        },
+        "sqlDatabaseName": {
+            "value": "exceldb"
+        },
+        "storageAccountName": {
+            "value": "excelstorageaccount"
+        },
+        "cdnProfileName": {
+            "value": "excelCdnProfile"
+        },
+        "functionAppName": {
+            "value": "excelFunctions"
+        },
+        "cognitiveServicesName": {
+            "value": "excelCognitiveServices"
+        }
+    }
+}
