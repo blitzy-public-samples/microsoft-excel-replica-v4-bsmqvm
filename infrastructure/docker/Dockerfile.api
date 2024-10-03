@@ -1,0 +1,25 @@
+FROM node:14-alpine
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json files
+COPY src/backend-api/package*.json ./
+
+# Install production dependencies
+RUN npm ci --only=production
+
+# Copy the API source code into the container
+COPY src/backend-api .
+
+# Build the API (if necessary, e.g., for TypeScript transpilation)
+RUN npm run build
+
+# Expose the port on which the API will run
+EXPOSE 3000
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Start the API when the container runs
+CMD ["npm", "start"]
