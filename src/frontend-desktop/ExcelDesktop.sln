@@ -1,0 +1,29 @@
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelDesktop", "ExcelDesktop\ExcelDesktop.csproj", "{8F9D3F2D-7A1E-4E4A-9B1F-9C1F4E2D3B1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelDesktop.Tests", "ExcelDesktop.Tests\ExcelDesktop.Tests.csproj", "{B7A9D6E0-7D1F-4E4B-9B2F-9C2F4E3D3B2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F9D3F2D-7A1E-4E4A-9B1F-9C1F4E2D3B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F9D3F2D-7A1E-4E4A-9B1F-9C1F4E2D3B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F9D3F2D-7A1E-4E4A-9B1F-9C1F4E2D3B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F9D3F2D-7A1E-4E4A-9B1F-9C1F4E2D3B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A9D6E0-7D1F-4E4B-9B2F-9C2F4E3D3B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A9D6E0-7D1F-4E4B-9B2F-9C2F4E3D3B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A9D6E0-7D1F-4E4B-9B2F-9C2F4E3D3B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A9D6E0-7D1F-4E4B-9B2F-9C2F4E3D3B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9F8E2D0-7B1E-4E4A-9B3F-9C3F4E4D3B3E}
+	EndGlobalSection
+EndGlobal
