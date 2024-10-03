@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CellEditorFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cellContentLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cellContentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cell_content_hint"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/applyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apply_button_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cellContentLayout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/cancel_button_text"
+        app:layout_constraintEnd_toStartOf="@+id/applyButton"
+        app:layout_constraintTop_toTopOf="@+id/applyButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+This XML layout file defines the structure for the cell editor fragment in the Excel Mobile Android application. Here's a breakdown of the components and their purposes:
+
+1. The root element is a `ConstraintLayout`, which provides a flexible way to arrange UI elements.
+
+2. A `TextInputLayout` is used to wrap the main input field, providing material design styling and additional features like floating labels.
+
+3. Inside the `TextInputLayout`, a `TextInputEditText` is used for entering and editing cell content.
+
+4. Two `AppCompatButton` elements are added for "Apply" and "Cancel" actions.
+
+5. Constraints are set to position elements relative to each other and the parent layout.
+
+6. Margins are applied to provide proper spacing between elements.
+
+7. The `tools:context` attribute is set to ".CellEditorFragment" to associate this layout with the corresponding Fragment class.
+
+8. String resources (e.g., `@string/cell_content_hint`) are used for text content to support localization.
+
+9. Standard material design spacing (16dp) is used for margins.
+
+10. The layout is designed to be responsive, using `0dp` width for the `TextInputLayout` to expand to fill the available space.
+
+This layout addresses the requirements mentioned in the JSON specification:
+
+- It provides a platform for efficient input of structured data (Data Management).
+- The layout is designed to adapt to different screen sizes and orientations (User Interface Design).
+- It uses material design components, ensuring a consistent look and feel across the Android platform (Cross-platform Accessibility).
+
+Note: Since the dependent files (styles.xml, strings.xml, and colors.xml) were not available, placeholder string resources are used. You should define these string resources in the `strings.xml` file:
+
+```xml
+<string name="cell_content_hint">Enter cell content</string>
+<string name="apply_button_text">Apply</string>
+<string name="cancel_button_text">Cancel</string>
