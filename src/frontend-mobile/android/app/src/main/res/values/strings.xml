@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">Microsoft Excel</string>
+
+    <!-- Formula bar -->
+    <string name="formula_bar_hint">Enter formula or value</string>
+
+    <!-- Workbook operations -->
+    <string name="new_workbook">New Workbook</string>
+    <string name="open_workbook">Open Workbook</string>
+    <string name="save_workbook">Save Workbook</string>
+
+    <!-- Worksheet -->
+    <string name="sheet_name_prefix">Sheet</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_formula">Invalid formula</string>
+    <string name="error_network_unavailable">Network unavailable</string>
+
+    <!-- Charts -->
+    <string name="chart_title_default">Chart Title</string>
+
+    <!-- Loading states -->
+    <string name="loading_workbook">Loading workbook…</string>
+
+    <!-- Sync status -->
+    <string name="sync_status_synced">Synced</string>
+    <string name="sync_status_syncing">Syncing…</string>
+    <string name="sync_status_pending">Pending sync</string>
+
+    <!-- Settings -->
+    <string name="settings_account">Account</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_language">Language</string>
+
+    <!-- About -->
+    <string name="about_app">About Microsoft Excel</string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_formula_bar">Formula bar, enter formula or value</string>
+    <string name="accessibility_new_workbook">Create a new workbook</string>
+    <string name="accessibility_open_workbook">Open an existing workbook</string>
+    <string name="accessibility_save_workbook">Save the current workbook</string>
+
+    <!-- Localization -->
+    <string name="localization_change_language">Change language</string>
+    <string name="localization_current_language">Current language: %s</string>
+
+    <!-- Collaboration -->
+    <string name="collaboration_share">Share workbook</string>
+    <string name="collaboration_user_editing">%s is editing</string>
+
+    <!-- Data analysis -->
+    <string name="data_analysis_pivot_table">Create Pivot Table</string>
+    <string name="data_analysis_chart">Create Chart</string>
+
+    <!-- Performance -->
+    <string name="performance_large_dataset_warning">Large dataset may affect performance</string>
+
+    <!-- Security -->
+    <string name="security_encrypt_workbook">Encrypt Workbook</string>
+    <string name="security_decrypt_workbook">Decrypt Workbook</string>
+
+    <!-- Help -->
+    <string name="help_documentation">Documentation</string>
+    <string name="help_support">Support</string>
+</resources>
