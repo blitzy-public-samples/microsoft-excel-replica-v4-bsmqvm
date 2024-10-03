@@ -1,0 +1,121 @@
+{
+  "authentication": {
+    "methods": [
+      {
+        "type": "MicrosoftAccount",
+        "enabled": true
+      },
+      {
+        "type": "AzureAD",
+        "enabled": true
+      },
+      {
+        "type": "MultiFactorAuth",
+        "enabled": true
+      }
+    ],
+    "singleSignOn": {
+      "enabled": true,
+      "providers": [
+        "Microsoft365"
+      ]
+    }
+  },
+  "authorization": {
+    "roleBasedAccessControl": {
+      "enabled": true,
+      "roles": [
+        {
+          "name": "Owner",
+          "permissions": [
+            "read",
+            "write",
+            "delete",
+            "share"
+          ]
+        },
+        {
+          "name": "Editor",
+          "permissions": [
+            "read",
+            "write"
+          ]
+        },
+        {
+          "name": "Viewer",
+          "permissions": [
+            "read"
+          ]
+        }
+      ]
+    }
+  },
+  "encryption": {
+    "dataAtRest": {
+      "algorithm": "AES",
+      "keySize": 256
+    },
+    "dataInTransit": {
+      "protocol": "TLS",
+      "version": "1.3"
+    },
+    "fileLevel": {
+      "enabled": true,
+      "algorithm": "AES"
+    }
+  },
+  "dataLossPrevention": {
+    "enabled": true,
+    "policies": [
+      {
+        "name": "PII Detection",
+        "action": "encrypt"
+      },
+      {
+        "name": "Sensitive Data Classification",
+        "action": "alert"
+      }
+    ]
+  },
+  "compliance": {
+    "standards": [
+      "GDPR",
+      "CCPA",
+      "HIPAA"
+    ],
+    "dataResidency": {
+      "enabled": true,
+      "regions": [
+        "EU",
+        "US",
+        "APAC"
+      ]
+    }
+  },
+  "apiSecurity": {
+    "oauth": {
+      "enabled": true,
+      "grantTypes": [
+        "authorization_code",
+        "refresh_token"
+      ]
+    },
+    "rateLimiting": {
+      "enabled": true,
+      "requestsPerMinute": 100
+    }
+  },
+  "monitoring": {
+    "logging": {
+      "level": "INFO",
+      "retentionDays": 90
+    },
+    "alerting": {
+      "enabled": true,
+      "channels": [
+        "email",
+        "sms"
+      ]
+    }
+  }
+}
