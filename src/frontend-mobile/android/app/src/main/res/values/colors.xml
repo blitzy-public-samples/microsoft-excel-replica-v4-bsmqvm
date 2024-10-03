@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="colorPrimary">#0078D4</color>
+    <color name="colorPrimaryDark">#005a9e</color>
+    <color name="colorAccent">#107C10</color>
+
+    <!-- Background and surface colors -->
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorSurface">#F3F3F3</color>
+
+    <!-- Text colors -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnBackground">#252525</color>
+    <color name="colorOnSurface">#252525</color>
+
+    <!-- Status colors -->
+    <color name="colorError">#D13438</color>
+    <color name="colorWarning">#FFC83D</color>
+    <color name="colorInfo">#0078D4</color>
+    <color name="colorSuccess">#107C10</color>
+
+    <!-- Additional UI colors -->
+    <color name="colorDivider">#E0E0E0</color>
+    <color name="colorDisabled">#A6A6A6</color>
+
+    <!-- Chart palette colors -->
+    <color name="colorChartPalette1">#0078D4</color>
+    <color name="colorChartPalette2">#107C10</color>
+    <color name="colorChartPalette3">#D13438</color>
+    <color name="colorChartPalette4">#FFC83D</color>
+    <color name="colorChartPalette5">#881798</color>
+
+    <!-- Accessibility colors -->
+    <color name="colorHighContrast">#000000</color>
+    <color name="colorLowContrast">#767676</color>
+
+    <!-- Dark theme colors -->
+    <color name="colorBackgroundDark">#1F1F1F</color>
+    <color name="colorSurfaceDark">#2D2D2D</color>
+    <color name="colorOnBackgroundDark">#FFFFFF</color>
+    <color name="colorOnSurfaceDark">#FFFFFF</color>
+
+    <!-- 
+    Human tasks:
+    1. Regularly review and update color values to ensure consistency with Microsoft's brand guidelines.
+    2. Conduct accessibility testing to verify sufficient contrast ratios for all color combinations.
+    3. Consider adding additional color resources for specific UI components as needed.
+    4. Ensure that the color scheme aligns with the Fluent Design System principles.
+    5. Periodically review and optimize the use of colors throughout the app for a cohesive look and feel.
+    -->
+</resources>
