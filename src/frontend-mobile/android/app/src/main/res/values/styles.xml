@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="android:textColorPrimary">@color/colorOnBackground</item>
+        <item name="android:textColorSecondary">@color/colorLowContrast</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- Theme variation without an action bar -->
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Dark theme version of the main application theme -->
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+        <item name="colorSurface">@color/colorSurfaceDark</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="android:textColorPrimary">@color/colorOnBackgroundDark</item>
+        <item name="android:textColorSecondary">@color/colorLowContrast</item>
+        <item name="android:windowBackground">@color/colorBackgroundDark</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- Text style for headlines -->
+    <style name="TextAppearance.Excel.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <!-- Text style for titles -->
+    <style name="TextAppearance.Excel.Title" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <!-- Text style for body text -->
+    <style name="TextAppearance.Excel.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <!-- Style for primary buttons -->
+    <style name="Widget.Excel.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <!-- Style for secondary buttons -->
+    <style name="Widget.Excel.Button.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Style for the app's toolbar -->
+    <style name="Widget.Excel.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/colorOnPrimary</item>
+    </style>
+
+    <!-- Style for the bottom navigation bar -->
+    <style name="Widget.Excel.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="itemIconTint">@color/colorPrimary</item>
+        <item name="itemTextColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Style for dialogs -->
+    <style name="ThemeOverlay.Excel.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+    </style>
+
+    <!-- Style for input fields -->
+    <style name="Widget.Excel.EditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Style for dropdown menus -->
+    <style name="Widget.Excel.Spinner" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Base style for charts -->
+    <style name="Widget.Excel.Chart">
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <!-- Style for cells in the spreadsheet -->
+    <style name="Widget.Excel.Cell">
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <!-- Style for the formula bar -->
+    <style name="Widget.Excel.FormulaBar" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+    </style>
+
+    <!-- Style for worksheet tabs -->
+    <style name="Widget.Excel.SheetTab" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabBackground">@color/colorSurface</item>
+        <item name="tabTextColor">@color/colorOnSurface</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+    </style>
+</resources>
