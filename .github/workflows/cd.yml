@@ -1,0 +1,182 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/*'
+  workflow_run:
+    workflows: ['Continuous Integration']
+    types:
+      - completed
+
+env:
+  AZURE_WEBAPP_NAME: excel-web-app
+  AZURE_RESOURCE_GROUP: excel-rg
+  GCP_PROJECT_ID: excel-project
+  GCP_APP_NAME: excel-app-engine
+
+jobs:
+  deploy-web:
+    name: Deploy Web Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          cd src/frontend-web
+          npm ci
+
+      - name: Build web application
+        run: |
+          cd src/frontend-web
+          npm run build
+
+      - name: Deploy to Azure Web Apps
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./src/frontend-web/build
+
+  deploy-desktop:
+    name: Deploy Desktop Application
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+
+      - name: Build desktop application
+        run: |
+          cd src/frontend-desktop
+          dotnet build --configuration Release
+
+      - name: Create installers
+        run: |
+          # Add commands to create Windows installers
+          # This might involve using tools like WiX or Inno Setup
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: excel-desktop-installers
+          path: src/frontend-desktop/installers
+
+  deploy-mobile:
+    name: Deploy Mobile Applications
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.x'
+
+      - name: Build mobile applications
+        run: |
+          cd src/frontend-mobile
+          flutter pub get
+          flutter build ios --release --no-codesign
+          flutter build apk --release
+
+      - name: Deploy to App Store
+        # Add steps to deploy iOS app to App Store
+        # This might involve using fastlane or other deployment tools
+
+      - name: Deploy to Google Play
+        # Add steps to deploy Android app to Google Play
+        # This might involve using fastlane or other deployment tools
+
+  deploy-backend:
+    name: Deploy Backend Services
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker images
+        run: |
+          docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/excel-api:${{ github.sha }} -f infrastructure/docker/Dockerfile.api .
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/excel-api:${{ github.sha }}
+
+      - name: Deploy to Kubernetes cluster
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            infrastructure/kubernetes/deployment.yaml
+            infrastructure/kubernetes/service.yaml
+          images: |
+            ${{ secrets.ACR_LOGIN_SERVER }}/excel-api:${{ github.sha }}
+          kubectl-version: 'latest'
+
+  deploy-dev:
+    name: Deploy to Development Environment
+    needs: [deploy-web, deploy-backend]
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Deploy to development environment
+        run: |
+          # Add commands to deploy to development environment
+          echo "Deploying to development environment"
+
+  deploy-staging:
+    name: Deploy to Staging Environment
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Deploy to staging environment
+        run: |
+          # Add commands to deploy to staging environment
+          echo "Deploying to staging environment"
+
+  deploy-production:
+    name: Deploy to Production Environment
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Deploy to production environment
+        run: |
+          # Add commands to deploy to production environment
+          echo "Deploying to production environment"
+
+  notify:
+    name: Notify Deployment Status
+    needs: [deploy-production]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Notify team
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: Deployment to production completed with status ${{ job.status }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
